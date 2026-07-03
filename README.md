@@ -152,8 +152,6 @@ The absolute Loss Ratio (~300%) is unrealistic for a real insurer because `annua
 ---
 
 ## 🔗 Links
-
-- 📊 **Tableau Public:** [Insert your Tableau Public URL here]
 - 📁 **Dataset:** Kaggle — Medical Insurance Dataset
 
 ---
