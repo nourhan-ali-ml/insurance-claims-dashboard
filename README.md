@@ -29,7 +29,7 @@ Insurance companies need to understand claim patterns, financial exposure, and r
 | High-Risk vs Standard | High-risk patients show proportionally higher Loss Ratio (345% vs 264%) |
 | Network Tier Pattern | Bronze: 354% Loss Ratio vs Platinum: 244% |
 | Most Common Claim Type | Lab Test (37,736 claims) |
-| Surgery Claims | Fewest in volume (12,787) but highest avg claim amount |
+| Surgery Claims | Fewest in volume (12,787); avg claim amount is nearly identical across claim types ($844–$861) |
 
 ---
 
@@ -54,6 +54,9 @@ insurance-claims-dashboard/
 │   ├── 02_risk_analysis.png
 │   └── 03_insights.png
 │
+├── stats_analysis.py           ← Hypothesis tests + regression (SciPy / statsmodels)
+├── STATS_RESULTS.md            ← Results, interpretation, limitations
+├── stats_output/               ← Charts + results.json
 ├── powerbi_guide.md            ← Full DAX measures + step-by-step guide
 └── README.md
 ```
@@ -71,7 +74,7 @@ insurance-claims-dashboard/
 | **SQL (SQLite / MySQL)** | Schema design, window functions, views |
 | **Power BI Desktop** | DAX measures, data modeling, interactive dashboard |
 | **Tableau Public** | Alternative visualization layer |
-| **Python (pandas)** | Customer-level → claim-level data engineering |
+| **Python (pandas, SciPy, statsmodels)** | Data engineering, hypothesis tests, regression |
 
 ---
 
@@ -141,17 +144,34 @@ The absolute Loss Ratio (~300%) is unrealistic for a real insurer because `annua
 
 ---
 
+## 📈 Statistical Analysis (Hypothesis Testing & Regression)
+
+Full write-up in [`STATS_RESULTS.md`](STATS_RESULTS.md); reproduce with `python stats_analysis.py`.
+
+| Question | Method | Result |
+|---|---|---|
+| Do smokers have higher claim cost? | Mann-Whitney U, Welch t-test on log cost, bootstrap CI (customer level) | Yes: geometric-mean ratio 1.57 (95% CI 1.54–1.60); mean +$521 (CI $485–$557) |
+| What drives claim cost? | OLS on log cost (age, BMI, smoker, plan) with customer-clustered SEs; Gamma GLM as robustness | Current smoker +59%, former +16%, +0.56%/year of age, +0.99%/BMI unit; plan type not significant |
+| Do plans differ in cost? | Kruskal-Wallis + ANOVA on log cost, Dunn-Holm post-hoc | p ≈ 0.05 but ε² ≈ 0.00008: no practical difference |
+
+**Why customer-level tests?** Claims are clustered within customers (ICC ≈ 0.51), so claim-level tests would overstate significance.
+**Caveat:** claim amounts are synthetic (split from customer totals), so this demonstrates the method rather than real-world causal findings.
+
+---
+
 ## 💡 Business Recommendations
 
 1. **Re-evaluate Bronze-tier pricing** — 45% higher Loss Ratio than Platinum suggests underpricing
 2. **Implement risk-weighted underwriting** — High-risk patients show proportionally higher claim costs
 3. **Factor smoking status into pricing** — Current smokers claim 56% more on average
-4. **Review Surgery pre-authorization** — Highest avg claim amount despite low volume
+4. **Price on risk factors, not plan type** — claim cost does not differ meaningfully across PPO/HMO/EPO/POS (see statistical analysis)
 5. **Reduce processing time SLA** — Target under 7 days vs current 11-day average
 
 ---
 
 ## 🔗 Links
+
+- 📊 **Tableau Public:** https://public.tableau.com/app/profile/nourhan.ali/viz/Insurancedashboard_17832044222360/InsightsRecommendations
 - 📁 **Dataset:** Kaggle — Medical Insurance Dataset
 
 ---
