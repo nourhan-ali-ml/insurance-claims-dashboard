@@ -1,0 +1,194 @@
+{
+  "n_claims": 162178,
+  "n_customers_with_claims": 62337,
+  "skew_claim_cost": 5.148599962859896,
+  "smoker": {
+    "n_current": 7593,
+    "n_never": 43387,
+    "mean_current": 1483.9018557159814,
+    "mean_never": 963.0592424064761,
+    "median_current": 1011.56,
+    "median_never": 635.06,
+    "mann_whitney_U": 210286409.0,
+    "mann_whitney_p": 0.0,
+    "prob_superiority": 0.6383196046135502,
+    "rank_biserial": 0.2766392092271004,
+    "welch_t_on_log": 40.460485690961356,
+    "welch_p": 0.0,
+    "geo_mean_ratio": 1.5702385494908135,
+    "geo_mean_ratio_ci95": [
+      1.5362846266397994,
+      1.6049428989600347
+    ],
+    "mean_diff": 520.8426133095053,
+    "mean_diff_ci95_bootstrap": [
+      485.3101074774078,
+      557.1299245828144
+    ],
+    "median_diff": 376.5,
+    "median_diff_ci95_bootstrap": [
+      349.15731250000005,
+      401.1980625
+    ]
+  },
+  "smoker_kruskal_3groups": {
+    "H": 1562.6357942466468,
+    "p": 0.0,
+    "median_former": 738.09
+  },
+  "regression": {
+    "n_obs": 162178,
+    "r_squared": 0.025634354877084653,
+    "adj_r_squared": 0.025592296792877556,
+    "coefficients": [
+      {
+        "term": "Intercept",
+        "coef": 5.53195,
+        "ci_low": 5.47223,
+        "ci_high": 5.59167,
+        "p": 0.0,
+        "pct_effect": 25163.68033,
+        "pct_low": 23699.08131,
+        "pct_high": 26718.41099
+      },
+      {
+        "term": "C(smoker, Treatment('Never'))[T.Current]",
+        "coef": 0.46459,
+        "ci_low": 0.43601,
+        "ci_high": 0.49316,
+        "p": 0.0,
+        "pct_effect": 59.1361,
+        "pct_low": 54.65318,
+        "pct_high": 63.74896
+      },
+      {
+        "term": "C(smoker, Treatment('Never'))[T.Former]",
+        "coef": 0.14492,
+        "ci_low": 0.12037,
+        "ci_high": 0.16946,
+        "p": 0.0,
+        "pct_effect": 15.59433,
+        "pct_low": 12.79125,
+        "pct_high": 18.46708
+      },
+      {
+        "term": "C(plan_type, Treatment('PPO'))[T.EPO]",
+        "coef": -0.01146,
+        "ci_low": -0.04016,
+        "ci_high": 0.01724,
+        "p": 0.43381,
+        "pct_effect": -1.13956,
+        "pct_low": -3.93651,
+        "pct_high": 1.73882
+      },
+      {
+        "term": "C(plan_type, Treatment('PPO'))[T.HMO]",
+        "coef": 0.00387,
+        "ci_low": -0.01837,
+        "ci_high": 0.02611,
+        "p": 0.73312,
+        "pct_effect": 0.38765,
+        "pct_low": -1.82027,
+        "pct_high": 2.64522
+      },
+      {
+        "term": "C(plan_type, Treatment('PPO'))[T.POS]",
+        "coef": 0.016,
+        "ci_low": -0.01317,
+        "ci_high": 0.04516,
+        "p": 0.28236,
+        "pct_effect": 1.61245,
+        "pct_low": -1.30811,
+        "pct_high": 4.61942
+      },
+      {
+        "term": "age",
+        "coef": 0.00556,
+        "ci_low": 0.00499,
+        "ci_high": 0.00614,
+        "p": 0.0,
+        "pct_effect": 0.55802,
+        "pct_low": 0.50034,
+        "pct_high": 0.61574
+      },
+      {
+        "term": "bmi",
+        "coef": 0.00983,
+        "ci_low": 0.00796,
+        "ci_high": 0.0117,
+        "p": 0.0,
+        "pct_effect": 0.98792,
+        "pct_low": 0.79963,
+        "pct_high": 1.17656
+      }
+    ]
+  },
+  "glm_gamma_pct_effect": {
+    "C(smoker, Treatment('Never'))[T.Current]": 56.834235999336016,
+    "C(smoker, Treatment('Never'))[T.Former]": 14.830331533817255,
+    "C(plan_type, Treatment('PPO'))[T.EPO]": -1.566151791289161,
+    "C(plan_type, Treatment('PPO'))[T.HMO]": 0.3072299300992176,
+    "C(plan_type, Treatment('PPO'))[T.POS]": 1.1924401923009809,
+    "age": 0.5748160907300015,
+    "bmi": 0.8857742418964198
+  },
+  "vif": {
+    "age": 1.0000000936520363,
+    "bmi": 1.0000000936520355
+  },
+  "plans": {
+    "kruskal_H": 7.8224209305409405,
+    "kruskal_p": 0.04982789659689706,
+    "epsilon_squared": 7.736545538544496e-05,
+    "anova_log_F": 2.7118291826045287,
+    "anova_log_p": 0.04330209311307877,
+    "group_stats": {
+      "PPO": {
+        "n": 21819,
+        "mean": 1051.7818200695842,
+        "median": 684.97
+      },
+      "HMO": {
+        "n": 21689,
+        "mean": 1056.0509205153526,
+        "median": 689.78
+      },
+      "EPO": {
+        "n": 9448,
+        "mean": 1029.3149927846953,
+        "median": 675.2350000000001
+      },
+      "POS": {
+        "n": 9381,
+        "mean": 1073.7367479381123,
+        "median": 713.83
+      }
+    },
+    "dunn_holm_p": {
+      "PPO": {
+        "PPO": 1.0,
+        "HMO": 0.7654,
+        "EPO": 0.4548,
+        "POS": 0.2062
+      },
+      "HMO": {
+        "PPO": 0.7654,
+        "HMO": 1.0,
+        "EPO": 0.4512,
+        "POS": 0.2826
+      },
+      "EPO": {
+        "PPO": 0.4548,
+        "HMO": 0.4512,
+        "EPO": 1.0,
+        "POS": 0.0359
+      },
+      "POS": {
+        "PPO": 0.2062,
+        "HMO": 0.2826,
+        "EPO": 0.0359,
+        "POS": 1.0
+      }
+    }
+  }
+}
